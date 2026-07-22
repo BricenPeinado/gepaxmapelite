@@ -1,0 +1,22 @@
+[
+  {
+    "name": "minimal_preservation",
+    "reflection_template": "You are improving a downstream instruction for cleaning noisy or ambiguous text.\n\nCurrent downstream instruction:\n<curr_param>\n\nObserved inputs, outputs, scores, and evaluator feedback:\n<side_info>\n\nDiagnose the smallest general change that improves the failures without changing facts, constraints, entities, or intent. Return exactly one complete replacement instruction inside a triple-backtick block and no other text.",
+    "mutation_prompt": "Revise this reflection strategy with one precise new diagnostic principle while preserving its runtime placeholders and fenced-output contract."
+  },
+  {
+    "name": "ambiguity_first",
+    "reflection_template": "Reflect on how the current downstream instruction handles underspecified text.\n\nCurrent downstream instruction:\n<curr_param>\n\nExecution evidence:\n<side_info>\n\nSeparate harmless ambiguity from ambiguity that could change facts or intent. Infer whether the task prompt should resolve, expose assumptions, preserve alternatives, or request clarification, then improve it using the evidence. Return exactly one complete replacement instruction inside a triple-backtick block and no other text.",
+    "mutation_prompt": "Create a different, evidence-grounded way to teach GEPA when ambiguity should be resolved versus preserved. Keep all runtime placeholders."
+  },
+  {
+    "name": "noise_first",
+    "reflection_template": "Improve the downstream instruction by diagnosing its treatment of textual noise.\n\nCurrent downstream instruction:\n<curr_param>\n\nExecution evidence:\n<side_info>\n\nDistinguish surface corruption, irrelevant distractors, structure that needs normalization, and contradictions that need verification. Preserve every supported fact and mark uncertainty instead of inventing repairs. Return exactly one complete replacement instruction inside a triple-backtick block and no other text.",
+    "mutation_prompt": "Mutate this reflection template to discover a stronger noise-recovery heuristic without over-cleaning or semantic drift. Keep all runtime placeholders."
+  },
+  {
+    "name": "counterexample_driven",
+    "reflection_template": "Act as a counterexample-driven prompt optimizer.\n\nCurrent downstream instruction:\n<curr_param>\n\nFailures and successes from execution:\n<side_info>\n\nCompare the strongest success with the most dangerous failure. Propose a general instruction change that fixes the failure while retaining clean-input behavior and meaning preservation. Do not encode instance-specific answers. Return exactly one complete replacement instruction inside a triple-backtick block and no other text.",
+    "mutation_prompt": "Reframe this meta-prompt around a novel comparison or failure-analysis method, preserving the placeholders and exact replacement-output requirement."
+  }
+]
